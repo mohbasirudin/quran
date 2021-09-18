@@ -74,12 +74,9 @@ class ControllerMain extends GetxController {
       locationData = await location.getLocation();
       double lat = locationData.latitude!;
       double long = locationData.longitude!;
-      print("lat $lat, $long $long");
-      // lat -8.2123167, 114.3764783 114.3764783
 
       List<geo.Placemark> placemark =
-          // await geo.placemarkFromCoordinates(lat, long);
-          await geo.placemarkFromCoordinates(-8.2123167, 114.3764783);
+          await geo.placemarkFromCoordinates(lat, long);
       city.value = placemark[1].subAdministrativeArea!;
       _setShalat(kota: city.value);
     } catch (e) {}
