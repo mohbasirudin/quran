@@ -78,10 +78,9 @@ class ControllerMain extends GetxController {
       // lat -8.2123167, 114.3764783 114.3764783
 
       List<geo.Placemark> placemark =
-          await geo.placemarkFromCoordinates(lat, long);
+          // await geo.placemarkFromCoordinates(lat, long);
+          await geo.placemarkFromCoordinates(-8.2123167, 114.3764783);
       city.value = placemark[1].subAdministrativeArea!;
-      // print("place:> ${placemark[0].toJson()}");
-      // print("kota:> ${city.value}");
       _setShalat(kota: city.value);
     } catch (e) {}
   }
@@ -89,15 +88,11 @@ class ControllerMain extends GetxController {
   int index = 0;
   void _setShalat({required String kota}) async {
     var currentCity = kota.split(" ")[index];
-    // print("cc: $currentCity");
     await ApiService.get(
-      // url: ApiShalat.kota(search: city.value),
       url: ApiShalat.kota(search: currentCity),
       callback: (success, message, response) {
-        // print("response: $success");
         if (success) {
           ModelKota kota = ModelKota.fromMap(response);
-          // print("id: ${kota.data[0].id}");
           kotaId = kota.data[0].id;
           kotaName = kota.data[0].lokasi;
           _setTime();

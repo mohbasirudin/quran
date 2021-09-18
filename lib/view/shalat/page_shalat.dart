@@ -46,28 +46,28 @@ class PageShalat extends GetView<ControllerShalat> {
           ],
         ),
         body: Container(
-          child: controller.data.isEmpty
-              ? Center(
-                  child: controller.loading.value
-                      ? CircularProgressIndicator()
-                      : Text(
-                          "Not Found",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500,
-                          ),
+          child: controller.loading.value
+              ? Center(child: CircularProgressIndicator())
+              : controller.data.isEmpty
+                  ? Center(
+                      child: Text(
+                        "Not Found",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500,
                         ),
-                )
-              : ListView.builder(
-                  controller: controller.scrollController,
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: controller.data.length,
-                  itemBuilder: (context, index) => _item(
-                    data: controller.data[index],
-                    index: index,
-                  ),
-                ),
+                      ),
+                    )
+                  : ListView.builder(
+                      controller: controller.scrollController,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: controller.data.length,
+                      itemBuilder: (context, index) => _item(
+                        data: controller.data[index],
+                        index: index,
+                      ),
+                    ),
         ),
       ),
     );

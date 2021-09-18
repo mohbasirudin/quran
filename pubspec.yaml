@@ -32,7 +32,6 @@ dependencies:
   sqflite: ^2.0.0+4
   location: ^4.3.0
   geocoding: ^2.0.1
-  url_launcher: ^6.0.10
   intl: ^0.17.0
 
 dev_dependencies:

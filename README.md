@@ -1,16 +1,7 @@
-# quran
+# Al-Quran dan Waktu Shalat
 
-A new Flutter project.
+Silahkan digunakan untuk media pembelajaran dan dikembangkan lagi, agar bisa menjadi lebih menarik lagi :)
 
-## Getting Started
+## Keterangan
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Untuk api jadwal shalat pada aplikasi ini saya menggunakan api dari [MyQuran.com](https://documenter.getpostman.com/view/841292/Tz5p7yHS#intro)
