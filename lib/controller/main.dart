@@ -24,7 +24,8 @@ class ControllerMain extends GetxController {
   RxString dateNow = "-".obs;
   RxString timeTo = "-:-:-".obs;
   RxString subTime = "-".obs;
-  String lokasi = "";
+  String kotaName = "";
+  String kotaId = "";
 
   @override
   void onInit() {
@@ -73,27 +74,50 @@ class ControllerMain extends GetxController {
       locationData = await location.getLocation();
       double lat = locationData.latitude!;
       double long = locationData.longitude!;
+      print("lat $lat, $long $long");
+      // lat -8.2123167, 114.3764783 114.3764783
+
       List<geo.Placemark> placemark =
           await geo.placemarkFromCoordinates(lat, long);
       city.value = placemark[1].subAdministrativeArea!;
-      // print("place:> $placemark");
+      // print("place:> ${placemark[0].toJson()}");
       // print("kota:> ${city.value}");
-      var idKota = "";
-      await ApiService.get(
-        url: ApiShalat.kota(search: city.value),
-        callback: (success, message, response) {
-          ModelKota kota = ModelKota.fromMap(response);
-          print("id: ${kota.data[0].id}");
-          idKota = kota.data[0].id;
-          lokasi = kota.data[0].lokasi;
-        },
-      );
+      _setShalat(kota: city.value);
+    } catch (e) {}
+  }
 
+  int index = 0;
+  void _setShalat({required String kota}) async {
+    var currentCity = kota.split(" ")[index];
+    // print("cc: $currentCity");
+    await ApiService.get(
+      // url: ApiShalat.kota(search: city.value),
+      url: ApiShalat.kota(search: currentCity),
+      callback: (success, message, response) {
+        // print("response: $success");
+        if (success) {
+          ModelKota kota = ModelKota.fromMap(response);
+          // print("id: ${kota.data[0].id}");
+          kotaId = kota.data[0].id;
+          kotaName = kota.data[0].lokasi;
+          _setTime();
+        } else {
+          index++;
+          _setShalat(kota: city.value);
+        }
+      },
+    );
+
+    // _setTime();
+  }
+
+  void _setTime() async {
+    try {
       var date = DateTime.now();
       dateNow.value = "${date.year}/${date.month}/${date.day}";
 
       await ApiService.get(
-        url: ApiShalat.jadwal(kota: idKota, date: dateNow.value),
+        url: ApiShalat.jadwal(kota: kotaId, date: dateNow.value),
         callback: (success, message, response) {
           ModelShalatDaily daily = ModelShalatDaily.fromMap(response);
           if (shalat.isNotEmpty) shalat.clear();
@@ -113,12 +137,6 @@ class ControllerMain extends GetxController {
         },
       );
 
-      _setTime();
-    } catch (e) {}
-  }
-
-  void _setTime() {
-    try {
       int time = (DateTime.now().hour * 3600) +
           (DateTime.now().minute * 60) +
           DateTime.now().second;

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran/binding/ayat.dart';
 import 'package:quran/binding/main.dart';
@@ -7,6 +6,7 @@ import 'package:quran/binding/splash.dart';
 import 'package:quran/view/page_main.dart';
 import 'package:quran/view/page_splash.dart';
 import 'package:quran/view/quran/page_ayat.dart';
+import 'package:quran/view/setting/page_setting.dart';
 import 'package:quran/view/shalat/page_shalat.dart';
 
 class BaseRoute {
@@ -27,9 +27,13 @@ class BaseRoute {
           binding: BindingAyat(),
         ),
         _getPage(
-          name: PageTo.ayat,
+          name: PageTo.shalat,
           page: PageShalat(),
           binding: BindingShalat(),
+        ),
+        _getPage(
+          name: PageTo.setting,
+          page: PageSetting(),
         ),
       ];
 
@@ -52,4 +56,5 @@ class PageTo {
   static const main = "/main";
   static const ayat = "/ayat";
   static const shalat = "/shalat";
+  static const setting = "/setting";
 }

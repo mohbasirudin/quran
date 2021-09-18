@@ -1,7 +1,7 @@
 class ApiShalat {
   static String _baseUrl = "https://api.myquran.com/v1/sholat/";
 
-  static String kota({required String search}) {
+  static String kota({String search = ""}) {
     if (search.isNotEmpty) {
       return "$_baseUrl/kota/cari/$search";
     } else {

@@ -19,9 +19,13 @@ class _MyAppState extends State<MyApp> {
       getPages: BaseRoute.pages(),
       theme: ThemeData(
         canvasColor: Colors.white,
+        backgroundColor: Colors.white,
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(
+            color: Colors.black87,
+          ),
+          titleTextStyle: TextStyle(
             color: Colors.black87,
           ),
           centerTitle: true,

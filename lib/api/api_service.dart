@@ -14,9 +14,8 @@ class ApiService {
   }) {
     return GetConnect().get(url).then((value) {
       var code = value.statusCode;
-      var success = code == 200;
-      var message = code == 200 ? "Berhasil" : "Terjadi Kesalahan";
-      // print("${jsonDecode(value.body)}");
+      var success = code == 200 && (value.body['status'] ?? true) == true;
+      var message = success ? "Berhasil" : "Terjadi Kesalahan";
 
       return callback(success, message, jsonDecode(value.bodyString!));
     });

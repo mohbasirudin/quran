@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:quran/base/routing.dart';
 import 'package:quran/base/send.dart';
 import 'package:quran/controller/main.dart';
 import 'package:quran/model/quran/surat.dart';
+import 'package:quran/view/setting/page_setting.dart';
 
 class PageMain extends GetView<ControllerMain> {
   const PageMain({Key? key}) : super(key: key);
@@ -30,7 +32,7 @@ class PageMain extends GetView<ControllerMain> {
             pinned: true,
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () => Get.toNamed(PageTo.setting),
                 icon: Icon(
                   Icons.settings,
                   color: Colors.blueGrey,
@@ -183,7 +185,13 @@ class PageMain extends GetView<ControllerMain> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              onPressed: () => Get.toNamed(PageTo.shalat),
+                              onPressed: () => Get.toNamed(
+                                PageTo.shalat,
+                                parameters: {
+                                  DataSend.kota_id: controller.kotaId,
+                                  DataSend.kota_name: controller.city.value,
+                                },
+                              ),
                               child: Text(
                                 "Lihat Semua",
                                 style: TextStyle(

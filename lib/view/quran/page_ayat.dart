@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran/base/assets.dart';
+import 'package:quran/base/global.dart';
 import 'package:quran/controller/ayat.dart';
 import 'package:quran/model/quran/ayat.dart';
 
@@ -171,18 +172,21 @@ class PageAyat extends GetView<ControllerAyat> {
                       textDirection: TextDirection.rtl,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 16),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      data[index].qRead,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300,
+                  Visibility(
+                    visible: BaseGlobal.showLatin.value,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 16),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        data[index].qRead,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
-                      textAlign: TextAlign.left,
                     ),
                   ),
                   Container(
